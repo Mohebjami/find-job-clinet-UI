@@ -1,0 +1,13 @@
+services:
+  frontend:
+    image: find-job:dev
+    build:
+      target: dependencies
+    command: ["npm", "run", "dev", "--", "--hostname", "0.0.0.0"]
+    environment:
+      NODE_ENV: development
+      BACKEND_URL: http://app:8000
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/.next
