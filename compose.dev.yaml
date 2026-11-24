@@ -1,6 +1,6 @@
 services:
   frontend:
-    image: find-job:dev
+    image: mb-web-client:dev
     build:
       target: dependencies
     command: ["npm", "run", "dev", "--", "--hostname", "0.0.0.0"]

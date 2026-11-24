@@ -1,4 +1,4 @@
-name: find-job
+name: mb-web-client
 
 services:
   frontend:
@@ -6,7 +6,7 @@ services:
       context: .
       args:
         BACKEND_URL: ${BACKEND_URL:-http://app:8000}
-    image: find-job:local
+    image: mb-web-client:local
     init: true
     ports:
       - "127.0.0.1:${FRONTEND_PORT:-3000}:3000"
@@ -27,4 +27,4 @@ services:
 networks:
   backend:
     external: true
-    name: ${BACKEND_NETWORK:-my-project_default}
+    name: ${BACKEND_NETWORK:-mb-backend_default}

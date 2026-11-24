@@ -1,3 +1,5 @@
+# mb-web-client
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Docker with Kiri and the Laravel backend
@@ -7,7 +9,7 @@ The production image uses Node.js 24 and Next.js [standalone output](https://nex
 Start the existing Laravel/MySQL stack first, using its configured `.env`:
 
 ```bash
-docker --context kiri compose -f ../my-project/compose.yaml up -d
+docker --context kiri compose -f ../mb-backend/compose.yaml up -d
 ```
 
 From this directory, build and start Next.js:
@@ -17,14 +19,14 @@ docker --context kiri compose build --builder kiri-build
 docker --context kiri compose up -d --wait
 ```
 
-Open [http://localhost:3000](http://localhost:3000). The frontend joins the backend's existing `my-project_default` network. Browser requests to `/api/*` are [proxied by Next.js](https://nextjs.org/docs/app/api-reference/config/next-config-js/rewrites) to Laravel at `http://app:8000/api/*`, including authentication cookies and authorization headers. Use relative API URLs such as `/api/v1/auth/login` in frontend code.
+Open [http://localhost:3000](http://localhost:3000). The frontend joins the backend's existing `mb-backend_default` network. Browser requests to `/api/*` are [proxied by Next.js](https://nextjs.org/docs/app/api-reference/config/next-config-js/rewrites) to Laravel at `http://app:8000/api/*`, including authentication cookies and authorization headers. Use relative API URLs such as `/api/v1/auth/login` in frontend code.
 
 Optional Compose settings can be supplied in an ignored `.env` file or exported in your shell:
 
 | Variable | Default | Purpose |
 | --- | --- | --- |
 | `FRONTEND_PORT` | `3000` | Localhost port for Next.js |
-| `BACKEND_NETWORK` | `my-project_default` | Existing Docker network containing Laravel |
+| `BACKEND_NETWORK` | `mb-backend_default` | Existing Docker network containing Laravel |
 | `BACKEND_URL` | `http://app:8000` | Backend origin used when building the API proxy |
 
 `BACKEND_URL` is embedded during `next build`; rebuild the image after changing it. With `npm run dev` outside Docker, the proxy defaults to `http://127.0.0.1:8080`; override `BACKEND_URL` with a host-reachable address if needed. Backend credentials stay in the backend's `.env`; frontend `.env` files are excluded from the Docker build context.
@@ -71,4 +73,3 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-# find-job-clinet-UI
